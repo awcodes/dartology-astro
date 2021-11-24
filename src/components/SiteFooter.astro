@@ -1,0 +1,8 @@
+---
+import { SITE, BRAND } from '@/config.ts';
+const date = new Date();
+---
+
+<footer class="py-5 align-full">
+    <div class="flex items-center justify-center text-sm">©Copyright {SITE.startDate}{ date.getFullYear() != SITE.startDate ? ` - ${date.getFullYear()}` : '' }{' '}{ BRAND.name }. All Rights Reserved</div>
+</footer>

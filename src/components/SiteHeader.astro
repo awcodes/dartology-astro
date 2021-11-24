@@ -1,0 +1,24 @@
+---
+import PrimaryNavigation from './PrimaryNavigation.astro';
+import MobileNavigation from './MobileNavigation.astro';
+---
+<header class="py-5 border-b-4 border-primary-500">
+    <div class="container flex items-center justify-between">
+        <div>
+            <a href="/" class="flex items-center text-2xl font-bold tracking-tight uppercase reset-link md:text-3xl text-primary-500">
+                <img src="/assets/images/icon.svg" width="132" height="100" class="w-auto h-8 fill-current md:h-10" alt="Dartology icon" />
+                <span class="ml-3">Dartology</span>
+            </a>
+        </div>
+        <div>
+            <div class="relative flex items-center">
+                <div class="block lg:hidden">
+                    <MobileNavigation />
+                </div>
+                <div class="hidden lg:flex">
+                    <PrimaryNavigation />
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

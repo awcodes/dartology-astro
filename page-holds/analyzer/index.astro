@@ -1,0 +1,34 @@
+---
+import BaseLayout from '@/layouts/base.astro';
+import Hero from '@/components/Hero.astro';
+import Content from '@/components/Content.astro';
+
+const meta = {
+    title: 'Shot Analyzer',
+    description: "Dartology's Shot Analyzer will give you a personalized heatmap of your highest scoring areas on the dartboard."
+}
+---
+
+<BaseLayout meta={meta}>
+    <Hero>
+        <h1>Shot Analyzer</h1>
+        <p>Our Shot Analyzer will give you a personalized heatmap of your highest scoring areas on the dartboard.</p>
+    </Hero>
+
+    <Content>
+        <div class="p-6 mt-8 bg-gray-800 rounded">
+            <h2 class="text-center">Instructions</h2>
+            <ol class="pl-8 list-decimal">
+                <li>Throw 25 - 50 darts at the double bull.</li>
+                <li>Enter the score of each dart thrown, not the total of all 3 darts in a turn.</li>
+                <li>Generate your Heatmap</li>
+            </ol>
+            <a href="/analyzer/analyze" class="mt-8 btn secondary">
+                Start Analyzing
+            </a>
+        </div>
+        <p class="mt-8 text-sm text-center">
+            Based on the work from <a href="https://www.stat.cmu.edu/~ryantibs/darts/index.html" target="_blank" rel="noopener">A Statistician Plays Darts</a> by <a href="http://www.stat.cmu.edu/~ryantibs/">Ryan Tibshirani</a>, <a href="http://www.linkedin.com/in/adprice" target="_blank" rel="noopener">Andy Price</a> and <a href="http://www-stat.stanford.edu/~jtaylo/" target="_blank" rel="noopener">Jon Taylor</a>.
+        </p>
+    </Content>
+</BaseLayout>

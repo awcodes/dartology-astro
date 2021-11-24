@@ -1,0 +1,44 @@
+---
+import BaseLayout from '@/layouts/base.astro';
+import Hero from '@/components/Hero.astro';
+import Content from '@/components/Content.astro';
+import allRoutines from '@/data/routines.json';
+
+const sortedRoutines = allRoutines.sort((a, b) => (a.name > b.name ? 1 : -1));
+
+const meta = {
+    title: 'Practice Routines',
+    description: 'Dartology has a plethora of practice routines to help you achieve your darting goals, even if your goal is as simple as beating your friends in your local pub on a Tuesday night.'
+}
+---
+
+<BaseLayout meta={meta}>
+    <Hero>
+        <h1>Practice Routines</h1>
+        <p>We have a plethora of practice routines to help you achieve your darting goals, even if your goal is as simple as beating your friends in your local pub on a Tuesday night.</p>
+    </Hero>
+
+    <Content>
+        <ul class="divide-y divide-gray-700">
+            {sortedRoutines.map((routine) => (
+                <li>
+                    <a href={`/routine/${routine.slug}`} class="flex reset-link items-center py-3 group rounded hover:bg-gray-800">
+                        <span class="flex-1 block">
+                            <h2 class="inline-block text-gray-300 group-hover:text-secondary-500">{routine.name}</h2>
+                            <div class="group-hover:text-secondary-300">
+                                {routine.goal}
+                            </div>
+                            <dl class="flex items-center mt-2 space-x-2 text-sm">
+                                <dt class="text-sm font-bold text-accent-500">Skills: </dt>
+                                <dd>{routine.categories.join(', ')}</dd>
+                             </dl>
+                        </span>
+                        <svg class="flex-shrink-0 w-6 h-6 ml-3 group-hover:text-secondary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </li>
+            ))}
+          </ul>
+    </Content>
+</BaseLayout>

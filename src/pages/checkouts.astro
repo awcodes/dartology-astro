@@ -1,0 +1,22 @@
+---
+import BaseLayout from '@/layouts/base.astro';
+import Hero from '@/components/Hero.astro';
+import Content from '@/components/Content.astro';
+import CheckoutsApp from '@/components/CheckoutsApp.vue';
+
+const meta = {
+    title: 'Checkout Chart',
+    description: "Dartology's Checkout Chart shows you the best way to go, based on playing the percentages, when trying to win a game."
+}
+---
+
+<BaseLayout meta={meta}>
+    <Hero>
+        <h1>Checkout Chart</h1>
+        <p>Yea, we hear it all the time too, but we got you covered. Our Checkout Chart shows you the best way to go, based on playing the percentages, when trying to win a game.</p>
+    </Hero>
+
+    <Content>
+        <CheckoutsApp client:visible />
+    </Content>
+</BaseLayout>

@@ -1,0 +1,85 @@
+---
+import { SITE } from '@/config.ts';
+import { SEO } from 'astro-seo';
+import SiteHeader from '@/components/SiteHeader.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+
+const { meta: {title = null, description = SITE.description, noindex = false, nofollow = false} } = Astro.props;
+
+const computedTitle = (title ? `${title} | ` : '') + SITE.title;
+---
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <SEO
+        title={computedTitle}
+        description={description}
+        canonical={Astro.request.canonicalURL}
+        noindex={noindex}
+        nofollow={nofollow}
+    />
+
+    <link rel="icon" type="image/svg+xml" href="/assets/images/icon.svg" />
+
+    <link rel="sitemap" href="/sitemap.xml"/>
+    <link rel="stylesheet" href={Astro.resolve('../css/app.css')} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <a href="#site-main" class="sr-only focus:not-sr-only">Skip to main content</a>
+
+    <div id="site-wrapper" class="flex flex-col min-h-screen font-sans antialiased leading-7 text-gray-300 bg-gray-900">
+        <SiteHeader />
+        <main className="flex-1"><slot /></main>
+        <SiteFooter />
+    </div>
+
+    <script defer src="https://unpkg.com/@alpinejs/trap@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        window.addEventListener('load', function () {
+            const ariaHelpersText = [
+                {
+                    id: "new-window",
+                    text: "Opens in a new window",
+                },
+            ];
+            const ariaHelpersElement = document.createElement("div");
+            ariaHelpersElement.style.display = "none";
+            ariaHelpersElement.setAttribute("id", "aria-helpers");
+            ariaHelpersText.forEach((helper) => {
+                let element = document.createElement("div");
+                element.setAttribute("id", helper.id);
+                element.innerText = helper.text;
+                ariaHelpersElement.appendChild(element);
+            });
+
+            document.body.appendChild(ariaHelpersElement);
+
+            const links = document.querySelectorAll("a[href^='https://'], a[href^='http://']");
+            const host = window.location.hostname;
+
+            const isInternalLink = (link) => new URL(link).hostname === host;
+
+            links.forEach((link) => {
+                if (isInternalLink(link)) return;
+
+                link.setAttribute("target", "_blank");
+                link.setAttribute("rel", "noopener");
+                link.setAttribute("aria-describedby", "new-window");
+            });
+        });
+    </script>
+</body>
+
+</html>
+

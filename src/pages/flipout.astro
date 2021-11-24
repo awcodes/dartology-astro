@@ -1,0 +1,22 @@
+---
+import BaseLayout from '@/layouts/base.astro';
+import Hero from '@/components/Hero.astro';
+import Content from '@/components/Content.astro';
+import FlipoutApp from '@/components/Flipout.vue';
+
+const meta = {
+    title: 'Flipout',
+    description: 'Flipout from Dartology is a tool designed to help you learn dart check outs. It works like flash cards by presenting you a score and allowing you to guess what the correct checkout is based on the likelihood of missing the intended target.'
+}
+---
+
+<BaseLayout meta={meta}>
+    <Hero>
+        <h1>Flipout</h1>
+        <p>Flipout from Dartology is a tool designed to help you learn dart check outs. It works like flash cards by presenting you a score and allowing you to guess what the correct checkout is based on the likelihood of missing the intended target.</p>
+    </Hero>
+
+    <Content>
+        <FlipoutApp client:visible />
+    </Content>
+</BaseLayout>

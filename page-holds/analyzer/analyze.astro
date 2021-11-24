@@ -1,0 +1,23 @@
+---
+import BaseLayout from '@/layouts/base.astro';
+import Hero from '@/components/Hero.astro';
+import Content from '@/components/Content.astro';
+
+const meta = {
+    title: 'Shot Analyzer',
+    description: "Dartology's Shot Analyzer will give you a personalized heatmap of your highest scoring areas on the dartboard."
+}
+---
+
+<BaseLayout meta={meta}>
+    <Hero>
+        <h1>Shot Analyzer</h1>
+        <p>Dartology's Shot Analyzer will show you your optimal scoring area.</p>
+    </Hero>
+
+    <Content>
+        <div class="p-6 mt-8 bg-gray-800 rounded">
+            <div id="analyzer-app"></div>
+        </div>
+    </Content>
+</BaseLayout>

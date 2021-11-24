@@ -1,0 +1,59 @@
+---
+import BaseLayout from '@/layouts/base.astro';
+import Hero from '@/components/Hero.astro';
+import Content from '@/components/Content.astro';
+import allRoutines from '@/data/routines.json';
+
+export function getStaticPaths() {
+    return allRoutines.map((routine) => {
+        return {
+            params: { slug: routine.slug }
+        };
+    });
+}
+
+const { slug } = Astro.request.params;
+const page = allRoutines.filter((routine) => {
+    return routine.slug == slug;
+});
+const routine = page[0];
+
+const meta = {
+    title: routine.name,
+    description: routine.goal.replace(/(<([^>]+)>)/gi, "")
+}
+---
+
+<BaseLayout meta={meta}>
+    <Hero>
+        <h1>{routine.name}</h1>
+        {routine.goal}
+    </Hero>
+
+    <Content>
+        <a href="/routines/" class="mb-4 btn-link">&larr; Back to Routines</a>
+
+        <div class="grid grid-cols-2 gap-8">
+            <div class="col-span-2 lg:col-span-1">
+                <h2 class="mt-6">Targets</h2>
+                {routine.targets}
+
+                <h2 class="mt-6">Skills Improved</h2>
+                <ul class="list-disc pl-4 ml-4">
+                    {routine.categories.map((category) => (
+                        <li>{category}</li>
+                    ))}
+                </ul>
+
+                <h2 class="mt-6">Instructions</h2>
+                {routine.instructions}
+            </div>
+
+            <div class="col-span-2 lg:col-span-1">
+                <div class="p-4 bg-gray-800 rounded">
+                <p class="text-center">Tracking coming soon.</p>
+                </div>
+            </div>
+        </div>
+    </Content>
+</BaseLayout>

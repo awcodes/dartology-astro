@@ -1,0 +1,22 @@
+---
+import BaseLayout from '@/layouts/base.astro';
+import Hero from '@/components/Hero.astro';
+import Content from '@/components/Content.astro';
+import SetupsApp from '@/components/SetupsApp.vue';
+
+const meta = {
+    title: 'Setups',
+    description: "Dartology's Setups tool will help you learn what the best thing to do is when you're trying to get to a good out before your opponent does."
+}
+---
+
+<BaseLayout meta={meta}>
+    <Hero>
+        <h1>Setups</h1>
+        <p>Sometimes it hard to know what to do to get to the best check out. Our Setups tool will help you learn what the best thing to do is when you're trying to get to a good out before your opponent does.</p>
+    </Hero>
+
+    <Content>
+        <SetupsApp client:visible />
+    </Content>
+</BaseLayout>
